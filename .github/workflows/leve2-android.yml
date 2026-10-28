@@ -38,7 +38,7 @@ jobs:
       - name: Install Android build dependencies
         run: |
           yes | sdkmanager \
-            "platforms;android-37" \
+            "platforms;android-36" \
             "build-tools;35.0.0" \
             "ndk;29.0.14206865" \
             "cmake;3.31.6" >/dev/null
@@ -58,6 +58,7 @@ jobs:
             --stacktrace \
             -Parmsx2.versionCode="$VERSION_CODE" \
             -Parmsx2.versionName="$VERSION_NAME" \
+            -Parmsx2.compileSdk=36 \
             -Parmsx2.applicationId=com.leve2.emulator \
             -Parmsx2.appLabel=@string/app_name_leve2
 

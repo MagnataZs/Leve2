@@ -33,6 +33,10 @@ O APK não contém BIOS, ROMs ou ISOs. O usuário precisa fornecer uma BIOS obti
 - Compilação local: não concluída porque o Sandbox não possui Android SDK/NDK configurados (`SDK location not found`).
 - A compilação reproduzível está configurada para ocorrer no GitHub Actions.
 
+### Correção de CI após o primeiro push
+
+O primeiro workflow parou ao tentar instalar `platforms;android-37`, pacote que não estava disponível no runner. O build agora usa Android API 36 por meio da propriedade `armsx2.compileSdk`, mantendo essa escolha explícita e reproduzível no workflow.
+
 ## Próxima etapa
 
 Adicionar a aplicação do preset recomendado ao finalizar o onboarding, sempre com confirmação do usuário, e gerar um relatório exportável com modelo do aparelho, perfil escolhido, jogo, renderer, resolução, frame time e temperatura.

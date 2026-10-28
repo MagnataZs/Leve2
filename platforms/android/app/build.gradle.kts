@@ -41,6 +41,7 @@ val armsx2MarchExtra = providers.gradleProperty("armsx2.marchExtra").orElse("")
 // interpreter bisect into the EE recompiler. Never set for a shipped build.
 val armsx2RecTestHooks = providers.gradleProperty("armsx2.recTestHooks").orElse("false")
 val armsx2ApplicationId = providers.gradleProperty("armsx2.applicationId").orElse("com.armsx2")
+val armsx2CompileSdk = providers.gradleProperty("armsx2.compileSdk").orElse("36")
 // Distribution channel, baked into BuildConfig so the app knows which release stream it belongs to
 // without guessing from the version string. "nightly" builds ship a distinct applicationId and
 // label (see ci-nightly-dualcore.sh) so they install alongside the stable app instead of replacing
@@ -116,14 +117,14 @@ val armsx2DiscordSdkDir: String? =
 
 android {
     namespace = "com.armsx2"
-    compileSdk = 37
+    compileSdk = armsx2CompileSdk.get().toInt()
     ndkVersion = armsx2NdkVersion.get()
 
     defaultConfig {
         applicationId = armsx2ApplicationId.get()
         manifestPlaceholders["appLabel"] = armsx2AppLabel.get()
         minSdk = armsx2MinSdk.get().toInt()
-        targetSdk = 37
+        targetSdk = armsx2CompileSdk.get().toInt()
         versionCode = providers.gradleProperty("armsx2.versionCode").orNull?.toInt() ?: 1088
         versionName = providers.gradleProperty("armsx2.versionName").orNull ?: "2.6.1"
         // Which release stream this APK came from: "stable" or "nightly". Read by the in-app
