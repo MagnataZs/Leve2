@@ -37,6 +37,8 @@ O APK não contém BIOS, ROMs ou ISOs. O usuário precisa fornecer uma BIOS obti
 
 O primeiro workflow parou ao tentar instalar `platforms;android-37`, pacote que não estava disponível no runner. O build agora usa Android API 36 por meio da propriedade `armsx2.compileSdk`, mantendo essa escolha explícita e reproduzível no workflow.
 
+O segundo workflow confirmou a compilação nativa, mas falhou no AAR metadata porque AndroidX 1.19/2.11 exigia API 37. As versões AndroidX/Compose foram fixadas em uma linha compatível com API 36. Os WAVs de menu, que estavam presentes no working tree mas ignorados pelo snapshot Git, também foram adicionados explicitamente ao repositório.
+
 ## Próxima etapa
 
 Adicionar a aplicação do preset recomendado ao finalizar o onboarding, sempre com confirmação do usuário, e gerar um relatório exportável com modelo do aparelho, perfil escolhido, jogo, renderer, resolução, frame time e temperatura.
