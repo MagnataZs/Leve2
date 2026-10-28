@@ -706,6 +706,7 @@
  "perf.speedLimit.label": "Limite de Velocidade %",
  "perf.speedhackProfile.fast": "Rápido",
  "perf.speedhackProfile.help": "Toque em um preset. Ideal = seguro para a maioria dos jogos. Rápido = speedhacks agressivos + resolução nativa para aparelhos fracos; pode causar falhas em alguns. Low-End = Rápido mais todas as alavancas baratas de GPU (res. nativa, blending mínimo, sem mipmaps/conversão de paleta, pré-carga parcial de texturas) com MTVU definido automaticamente pela sua CPU. Mexer em qualquer ajuste tira o destaque dos presets (personalizado).",
+ "perf.speedhackProfile.adrenoLegacy": "Adreno antiga",
  "perf.speedhackProfile.label": "Perfil de Speedhack",
  "perf.speedhackProfile.lowEnd": "Low-End",
  "perf.speedhackProfile.optimal": "Ideal",

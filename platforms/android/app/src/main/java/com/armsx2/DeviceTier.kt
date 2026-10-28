@@ -83,4 +83,16 @@ object DeviceTier {
     } catch (_: Throwable) {
         "unknown"
     }
+
+    /** Best-effort hint for older Qualcomm graphics stacks. Android has no reliable public API
+     * for the exact Adreno model, so this never claims certainty or forces a driver. */
+    fun hasLegacyAdrenoHint(): Boolean = try {
+        val fingerprint = listOf(Build.SOC_MODEL, Build.HARDWARE, Build.MANUFACTURER, Build.MODEL)
+            .filterNotNull().joinToString(" ").lowercase()
+        fingerprint.contains("sm6225") ||
+            fingerprint.contains("sm6115") ||
+            (fingerprint.contains("redmi note 11") && fingerprint.contains("qualcomm"))
+    } catch (_: Throwable) {
+        false
+    }
 }

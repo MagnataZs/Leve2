@@ -1444,6 +1444,7 @@ private val BASE_EN: Map<String, String> = mapOf(
     "perf.speedLimit.label" to "Speed Limit %",
     "perf.speedhackProfile.fast" to "Fast",
     "perf.speedhackProfile.help" to "Tap a preset. Optimal = safe for most games. Fast = aggressive speedhacks + native resolution for low-end devices; may glitch some. Low-End = Fast plus every cheap GPU lever (native res, min blending, no mipmaps/palette-conv, partial texture preload) with MTVU auto-set from your CPU. Tweaking any setting un-highlights the presets (custom).",
+    "perf.speedhackProfile.adrenoLegacy" to "Old Adreno",
     "perf.speedhackProfile.label" to "Speedhack Profile",
     "perf.speedhackProfile.lowEnd" to "Low-End",
     "perf.autoTune.label" to "Automatic Performance Tuning",

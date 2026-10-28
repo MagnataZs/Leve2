@@ -39,6 +39,13 @@ O primeiro workflow parou ao tentar instalar `platforms;android-37`, pacote que 
 
 O segundo workflow confirmou a compilação nativa, mas falhou no AAR metadata porque AndroidX 1.19/2.11 exigia API 37. As versões AndroidX/Compose foram fixadas em uma linha compatível com API 36. Os WAVs de menu, que estavam presentes no working tree mas ignorados pelo snapshot Git, também foram adicionados explicitamente ao repositório.
 
+## 2026-10-28 — compatibilidade Adreno antiga
+
+- Adicionada uma detecção heurística e não invasiva para Snapdragon 680/662 (`SM6225`/`SM6115`) e variantes Qualcomm do Redmi Note 11.
+- Criado o preset **Adreno antiga**, que usa resolução interna nativa, escala de apresentação 1x, blending mínimo, mipmaps desligados, pré-carga parcial e o perfil de recursos Adreno já existente.
+- O preset não força Vulkan, OpenGL, driver de terceiros ou skip-draw: cada jogo continua podendo ser ajustado manualmente.
+- O onboarding passa a explicar quando o aparelho foi identificado como Qualcomm/Adreno antiga.
+
 ## Próxima etapa
 
 Adicionar a aplicação do preset recomendado ao finalizar o onboarding, sempre com confirmação do usuário, e gerar um relatório exportável com modelo do aparelho, perfil escolhido, jogo, renderer, resolução, frame time e temperatura.

@@ -2295,6 +2295,17 @@ data class Settings(
             ),
         )
 
+        /** Conservative profile for older Adreno/Vulkan driver stacks, such as Snapdragon 680.
+         * Reuses safe Low-End levers, selects the existing Adreno feature profile and lowers
+         * presentation scale. It never forces a third-party driver or skips game draws. */
+        fun legacyAdrenoPreset(base: Settings, mtvu: Boolean): Settings {
+            val low = lowEndPreset(base, mtvu)
+            return low.copy(
+                output = low.output.copy(hwScaler = 1),
+                hwFixes = low.hwFixes.copy(gpuProfile = 2), // Adreno
+            )
+        }
+
         /** Lenient parse — missing keys fall back to defaults so old saved
          *  blobs survive when new fields are added. */
         fun fromJson(json: JSONObject): Settings {

@@ -13,10 +13,11 @@ data class Leve2DeviceProfile(
     val name: Name,
     val reasons: List<String>,
     val suggestedPreset: SuggestedPreset,
+    val legacyAdrenoHint: Boolean = false,
 ) {
     enum class Name { ENTRY, BUDGET, STANDARD }
 
-    enum class SuggestedPreset { LOW_END, FAST, OPTIMAL }
+    enum class SuggestedPreset { LOW_END, FAST, ADRENO_LEGACY, OPTIMAL }
 
     fun summary(): String = buildString {
         append(name.name.lowercase().replace('_', '-'))
@@ -36,9 +37,11 @@ data class Leve2DeviceProfile(
         fun recommend(context: Context): Leve2DeviceProfile {
             val cores = DeviceTier.coreCount()
             val lowEnd = DeviceTier.isLowEnd(context)
+            val legacyAdreno = DeviceTier.hasLegacyAdrenoHint()
             val reasons = buildList {
                 if (cores < 6) add("poucos núcleos disponíveis ($cores)")
                 if (lowEnd) add("o aparelho foi sinalizado como entrada pelo Android")
+                if (legacyAdreno) add("perfil Qualcomm/Adreno antiga detectado")
             }
 
             return when {
@@ -46,16 +49,25 @@ data class Leve2DeviceProfile(
                     name = Name.ENTRY,
                     reasons = reasons,
                     suggestedPreset = SuggestedPreset.LOW_END,
+                    legacyAdrenoHint = legacyAdreno,
+                )
+                legacyAdreno -> Leve2DeviceProfile(
+                    name = Name.BUDGET,
+                    reasons = reasons,
+                    suggestedPreset = SuggestedPreset.ADRENO_LEGACY,
+                    legacyAdrenoHint = true,
                 )
                 lowEnd -> Leve2DeviceProfile(
                     name = Name.BUDGET,
                     reasons = reasons,
                     suggestedPreset = SuggestedPreset.FAST,
+                    legacyAdrenoHint = false,
                 )
                 else -> Leve2DeviceProfile(
                     name = Name.STANDARD,
                     reasons = reasons,
                     suggestedPreset = SuggestedPreset.OPTIMAL,
+                    legacyAdrenoHint = false,
                 )
             }
         }
